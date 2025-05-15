@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Logística da Merenda Escolar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f0f9ff;
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen flex flex-col">
+        <!-- Cabeçalho -->
+        <header class="bg-green-600 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                        <circle cx="9" cy="7" r="4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                    </svg>
+                    <div>
+                        <h1 class="text-2xl font-bold">NutriEscola</h1>
+                        <p class="text-sm">Sistema de Logística da Merenda Escolar</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <span class="font-semibold">Maria Silva</span>
+                    <div class="bg-green-700 rounded-full h-10 w-10 flex items-center justify-center">
+                        <span class="font-bold">MS</span>
+                    </div>
+                </div>
+                <button class="md:hidden text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Conteúdo Principal -->
+        <main class="flex-grow container mx-auto px-4 py-8">
+            <!-- Resumo -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="card bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-gray-500 text-sm">Estoque Total</h3>
+                            <p class="text-2xl font-bold">1.250 kg</p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-green-500 text-sm font-semibold">↑ 12% </span>
+                        <span class="text-gray-500 text-sm">desde o mês passado</span>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-gray-500 text-sm">Refeições Servidas</h3>
+                            <p class="text-2xl font-bold">5.840</p>
+                        </div>
+                        <div class="bg-blue-100 p-3 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-blue-500 text-sm font-semibold">↑ 8% </span>
+                        <span class="text-gray-500 text-sm">desde o mês passado</span>
+                    </div>
+                </div>
+
+                <div class="card bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-500">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-gray-500 text-sm">Itens a Vencer</h3>
+                            <p class="text-2xl font-bold">8 itens</p>
+                        </div>
+                        <div class="bg-yellow-100 p-3 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-yellow-500 text-sm font-semibold">Atenção! </span>
+                        <span class="text-gray-500 text-sm">Vencimento em 7 dias</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Abas -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+                <div class="flex border-b">
+                    <button class="tab-button px-6 py-4 font-medium text-green-600 border-b-2 border-green-600" data-tab="estoque">Estoque</button>
+                    <button class="tab-button px-6 py-4 font-medium text-gray-500 hover:text-green-600" data-tab="cardapio">Cardápio</button>
+                    <button class="tab-button px-6 py-4 font-medium text-gray-500 hover:text-green-600" data-tab="distribuicao">Distribuição</button>
+                    <button class="tab-button px-6 py-4 font-medium text-gray-500 hover:text-green-600" data-tab="relatorios">Relatórios</button>
+                </div>
+
+                <!-- Conteúdo da Aba Estoque -->
+                <div id="estoque" class="tab-content active p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold">Controle de Estoque</h2>
+                        <div class="flex space-x-2">
+                            <div class="relative">
+                                <input type="text" placeholder="Buscar item..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                            <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                                Adicionar Item
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead>
+                                <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                    <th class="py-3 px-6 text-left">Item</th>
+                                    <th class="py-3 px-6 text-left">Categoria</th>
+                                    <th class="py-3 px-6 text-center">Quantidade</th>
+                                    <th class="py-3 px-6 text-center">Unidade</th>
+                                    <th class="py-3 px-6 text-center">Data de Validade</th>
+                                    <th class="py-3 px-6 text-center">Status</th>
+                                    <th class="py-3 px-6 text-center">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm">
+                                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                    <td class="py-3 px-6 text-left">Arroz Branco</td>
+                                    <td class="py-3 px-6 text-left">Grãos</td>
+                                    <td class="py-3 px-6 text-center">250</td>
+                                    <td class="py-3 px-6 text-center">kg</td>
+                                    <td class="py-3 px-6 text-center">15/12/2023</td>
+                                    <td class="py-3 px-6 text-center">
+                                        <span class="bg-green-100 text-green-800 py-1 px-3 rounded-full text-xs">Adequado</span>
+                                    </td>
+                                    <td class="py-3 px-6 text-center">
+                                        <div class="flex item-center justify-center">
+                                            <button class="transform hover:text-green-500 hover:scale-110 transition-all mr-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                </svg>
+                                            </button>
+                                            <button class="transform hover:text-red-500 hover:scale-110 transition-all">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                    <td class="py-3 px-6 text-left">Feijão Carioca</td>
+                                    <td class="py-3 px-6 text-left">Grãos</td>
+                                    <td class="py-3 px-6 text-center">180</td>
+                                    <td class="py-3 px-6 text-center">kg</td>
+                                    <td class="py-3 px-6 text-center">10/11/2023</td>
+                                    <td class="py-3 px-6 text-center">
+                                        <span class="bg-yellow-100 text-yellow-800 py-1 px-3 rounded-full text-xs">Atenção</span>
+                                    </td>
+                                    <td class="py-3 px-6 text-center">
+                                        <div class="flex item-center justify-center">
+                                            <button class="transform hover:text-green-500 hover:scale-110 transition-all mr-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                </svg>
+                                            </button>
+                                            <button class="transform hover:text-red-500 hover:scale-110 transition-all">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                    <td class="py-3 px-6 text-left">Maçã</td>
+                                    <td class="py-3 px-6 text-left">Frutas</td>
+                                    <td class="py-3 px-6 text-center">120</td>
+                                    <td class="py-3 px-6 text-center">kg</td>
+                                    <td class="py-3 px-6 text-center">05/11/2023</td>
+                                    <td class="py-3 px-6 text-center">
+                                        <span class="bg-red-100 text-red-800 py-1 px-3 rounded-full text-xs">Crítico</span>
+                                    </td>
+                                    <td class="py-3 px-6 text-center">
+                                        <div class="flex item-center justify-center">
+                                            <button class="transform hover:text-green-500 hover:scale-110 transition-all mr-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                </svg>
+                                            </button>
+                                            <button class="transform hover:text-red-500 hover:scale-110 transition-all">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                    <td class="py-3 px-6 text-left">Frango</td>
+                                    <td class="py-3 px-6 text-left">Proteínas</td>
+                                    <td class="py-3 px-6 text-center">85</td>
+                                    <td class="py-3 px-6 text-center">kg</td>
+                                    <td class="py-3 px-6 text-center">20/12/2023</td>
+                                    <td class="py-3 px-6 text-center">
+                                        <span class="bg-green-100 text-green-800 py-1 px-3 rounded-full text-xs">Adequado</span>
+                                    </td>
+                                    <td class="py-3 px-6 text-center">
+                                        <div class="flex item-center justify-center">
+                                            <button class="transform hover:text-green-500 hover:scale-110 transition-all mr-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                </svg>
+                                            </button>
+                                            <button class="transform hover:text-red-500 hover:scale-110 transition-all">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                    <td class="py-3 px-6 text-left">Leite</td>
+                                    <td class="py-3 px-6 text-left">Laticínios</td>
+                                    <td class="py-3 px-6 text-center">200</td>
+                                    <td class="py-3 px-6 text-center">L</td>
+                                    <td class="py-3 px-6 text-center">30/11/2023</td>
+                                    <td class="py-3 px-6 text-center">
+                                        <span class="bg-green-100 text-green-800 py-1 px-3 rounded-full text-xs">Adequado</span>
+                                    </td>
+                                    <td class="py-3 px-6 text-center">
+                                        <div class="flex item-center justify-center">
+                                            <button class="transform hover:text-green-500 hover:scale-110 transition-all mr-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                </svg>
+                                            </button>
+                                            <button class="transform hover:text-red-500 hover:scale-110 transition-all">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Conteúdo da Aba Cardápio -->
+                <div id="cardapio" class="tab-content p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold">Planejamento de Cardápio</h2>
+                        <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                            Novo Cardápio
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <h3 class="font-bold text-center mb-2">Segunda-feira</h3>
+                            <div class="bg-white p-3 rounded-md shadow-sm mb-2">
+                                <h4 class="font-semibold text-sm text-gray-600">Café da Manhã</h4>
+                                <p class="text-sm">Leite com chocolate e pão com manteiga</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-md shadow-sm mb-2">
+                                <h4 class="font-semibold text-sm text-gray-600">Almoço</h4>
+                                <p class="text-sm">Arroz, feijão, frango assado e salada de alface</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-md shadow-sm">
+                                <h4 class="font-semibold text-sm text-gray-600">Lanche</h4>
+                                <p class="text-sm">Suco de laranja e bolo de cenoura</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <h3 class="font-bold text-center mb-2">Terça-feira</h3>
+                            <div class="bg-white p-3 rounded-md shadow-sm mb-2">
+                                <h4 class="font-semibold text-sm text-gray-600">Café da Manhã</h4>
+                                <p class="text-sm">Vitamina de banana e biscoito de maisena</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-md shadow-sm mb-2">
+                                <h4 class="font-semibold text-sm text-gray-600">Almoço</h4>
+                                <p class="text-sm">Macarrão com molho de carne moída e legumes</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-md shadow-sm">
+                                <h4 class="font-semibold text-sm text-gray-600">Lanche</h4>
+                                <p class="text-sm">Iogurte com granola</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <h3 class="font-bold text-center mb-2">Quarta-feira</h3>
+                            <div class="bg-white p-3 rounded-md shadow-sm mb-2">
+                                <h4 class="font-semibold text-sm text-gray-600">Café da Manhã</h4>
+                                <p class="text-sm">Mingau de aveia com maçã</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-md shadow-sm mb-2">
+                                <h4 class="font-semibold text-sm text-gray-600">Almoço</h4>
+                                <p class="text-sm">Arroz, feijão, omelete de legumes e salada</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-md shadow-sm">
+                                <h4 class="font-semibold text-sm text-gray-600">Lanche</h4>
+                                <p class="text-sm">Salada de frutas</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <h3 class="font-bold text-center mb-2">Quinta-feira</h3>
+                            <div class="bg-white p-3 rounded-md shadow-sm mb-2">
+                                <h4 class="font-semibold text-sm text-gray-600">Café da Manhã</h4>
+                                <p class="text-sm">Leite com café e pão com queijo</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-md shadow-sm mb-2">
+                                <h4 class="font-semibold text-sm text-gray-600">Almoço</h4>
+                                <p class="text-sm">Arroz, feijão, carne cozida com batatas</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-md shadow-sm">
+                                <h4 class="font-semibold text-sm text-gray-600">Lanche</h4>
+                                <p class="text-sm">Suco de maracujá e pão de queijo</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <h3 class="font-bold text-center mb-2">Sexta-feira</h3>
+                            <div class="bg-white p-3 rounded-md shadow-sm mb-2">
+                                <h4 class="font-semibold text-sm text-gray-600">Café da Manhã</h4>
+                                <p class="text-sm">Suco de frutas e tapioca</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-md shadow-sm mb-2">
+                                <h4 class="font-semibold text-sm text-gray-600">Almoço</h4>
+                                <p class="text-sm">Arroz, feijão, peixe assado e purê de batata</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-md shadow-sm">
+                                <h4 class="font-semibold text-sm text-gray-600">Lanche</h4>
+                                <p class="text-sm">Gelatina com frutas</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <h3 class="font-bold mb-3">Informações Nutricionais</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
+                                <h4 class="font-semibold text-gray-600">Calorias</h4>
+                                <p class="text-2xl font-bold">1.850 <span class="text-sm font-normal text-gray-500">kcal/dia</span></p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+                                <h4 class="font-semibold text-gray-600">Proteínas</h4>
+                                <p class="text-2xl font-bold">65 <span class="text-sm font-normal text-gray-500">g/dia</span></p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-yellow-500">
+                                <h4 class="font-semibold text-gray-600">Carboidratos</h4>
+                                <p class="text-2xl font-bold">240 <span class="text-sm font-normal text-gray-500">g/dia</span></p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-red-500">
+                                <h4 class="font-semibold text-gray-600">Gorduras</h4>
+                                <p class="text-2xl font-bold">45 <span class="text-sm font-normal text-gray-500">g/dia</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo da Aba Distribuição -->
+                <div id="distribuicao" class="tab-content p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold">Distribuição de Alimentos</h2>
+                        <div class="flex space-x-2">
+                            <select class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
+                                <option>Todas as Escolas</option>
+                                <option>Escola Municipal João Silva</option>
+                                <option>Escola Municipal Maria Santos</option>
+                                <option>Escola Municipal Pedro Alves</option>
+                            </select>
+                            <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+                                Gerar Guia
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-white p-5 rounded-lg shadow-md">
+                            <h3 class="font-bold text-lg mb-4">Próximas Entregas</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                    <div>
+                                        <h4 class="font-semibold">Escola Municipal João Silva</h4>
+                                        <p class="text-sm text-gray-600">450 alunos</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-semibold">03/11/2023</p>
+                                        <p class="text-sm text-gray-600">08:00 - 10:00</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                    <div>
+                                        <h4 class="font-semibold">Escola Municipal Maria Santos</h4>
+                                        <p class="text-sm text-gray-600">320 alunos</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-semibold">03/11/2023</p>
+                                        <p class="text-sm text-gray-600">10:30 - 12:30</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                    <div>
+                                        <h4 class="font-semibold">Escola Municipal Pedro Alves</h4>
+                                        <p class="text-sm text-gray-600">280 alunos</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-semibold">04/11/2023</p>
+                                        <p class="text-sm text-gray-600">08:00 - 10:00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-lg shadow-md">
+                            <h3 class="font-bold text-lg mb-4">Status de Entrega</h3>
+                            <div class="relative pt-1">
+                                <div class="flex mb-2 items-center justify-between">
+                                    <div>
+                                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200">
+                                            Em andamento
+                                        </span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-xs font-semibold inline-block text-green-600">
+                                            65%
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-green-200">
+                                    <div style="width: 65%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3 mt-4">
+                                <div class="flex items-center">
+                                    <div class="bg-green-500 p-1 rounded-full mr-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">Escola Municipal Ana Costa</p>
+                                        <p class="text-xs text-gray-500">Entregue em 01/11/2023</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="bg-green-500 p-1 rounded-full mr-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">Escola Municipal Carlos Drummond</p>
+                                        <p class="text-xs text-gray-500">Entregue em 02/11/2023</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="bg-yellow-500 p-1 rounded-full mr-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">Escola Municipal João Silva</p>
+                                        <p class="text-xs text-gray-500">Agendado para 03/11/2023</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="bg-gray-300 p-1 rounded-full mr-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">Escola Municipal Maria Santos</p>
+                                        <p class="text-xs text-gray-500">Agendado para 03/11/2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-lg shadow-md">
+                        <h3 class="font-bold text-lg mb-4">Mapa de Distribuição</h3>
+                        <div class="bg-gray-200 rounded-lg h-64 flex items-center justify-center">
+                            <div class="text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                                </svg>
+                                <p class="text-gray-500">Mapa de distribuição das escolas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo da Aba Relatórios -->
+                <div id="relatorios" class="tab-content p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold">Relatórios e Análises</h2>
+                        <div class="flex space-x-2">
+                            <select class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
+                                <option>Último Mês</option>
+                                <option>Últimos 3 Meses</option>
+                                <option>Último Ano</option>
+                                <option>Personalizado</option>
+                            </select>
+                            <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Exportar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-white p-5 rounded-lg shadow-md">
+                            <h3 class="font-bold text-lg mb-4">Consumo por Categoria</h3>
+                            <div class="bg-gray-100 rounded-lg p-4 h-64 flex items-center justify-center">
+                                <div class="w-full h-full flex items-center justify-center">
+                                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                                        <!-- Gráfico de pizza simulado -->
+                                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#e2e8f0" stroke-width="20" />
+                                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#4ade80" stroke-width="20" stroke-dasharray="251.2" stroke-dashoffset="0" transform="rotate(-90 50 50)" />
+                                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#3b82f6" stroke-width="20" stroke-dasharray="251.2" stroke-dashoffset="188.4" transform="rotate(-90 50 50)" />
+                                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#f59e0b" stroke-width="20" stroke-dasharray="251.2" stroke-dashoffset="125.6" transform="rotate(-90 50 50)" />
+                                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#ef4444" stroke-width="20" stroke-dasharray="251.2" stroke-dashoffset="62.8" transform="rotate(-90 50 50)" />
+                                        <text x="50" y="50" text-anchor="middle" dy=".3em" font-size="10" fill="#1f2937" font-weight="bold">Consumo</text>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 mt-4">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-green-400 rounded-full mr-2"></div>
+                                    <span class="text-sm">Grãos (40%)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+                                    <span class="text-sm">Proteínas (25%)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                                    <span class="text-sm">Frutas/Vegetais (20%)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                                    <span class="text-sm">Laticínios (15%)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-lg shadow-md">
+                            <h3 class="font-bold text-lg mb-4">Refeições Servidas</h3>
+                            <div class="bg-gray-100 rounded-lg p-4 h-64 flex items-center justify-center">
+                                <div class="w-full h-full flex items-end justify-around">
+                                    <div class="flex flex-col items-center">
+                                        <div class="bg-green-500 w-8 h-40 rounded-t-lg"></div>
+                                        <span class="text-xs mt-1">Seg</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="bg-green-500 w-8 h-32 rounded-t-lg"></div>
+                                        <span class="text-xs mt-1">Ter</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="bg-green-500 w-8 h-48 rounded-t-lg"></div>
+                                        <span class="text-xs mt-1">Qua</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="bg-green-500 w-8 h-36 rounded-t-lg"></div>
+                                        <span class="text-xs mt-1">Qui</span>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="bg-green-500 w-8 h-28 rounded-t-lg"></div>
+                                        <span class="text-xs mt-1">Sex</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <div class="flex justify-between text-sm text-gray-600">
+                                    <span>Total de refeições na semana: 5.840</span>
+                                    <span>Média diária: 1.168</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-lg shadow-md">
+                        <h3 class="font-bold text-lg mb-4">Desperdício de Alimentos</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white">
+                                <thead>
+                                    <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                        <th class="py-3 px-6 text-left">Escola</th>
+                                        <th class="py-3 px-6 text-center">Alunos</th>
+                                        <th class="py-3 px-6 text-center">Refeições Servidas</th>
+                                        <th class="py-3 px-6 text-center">Desperdício (kg)</th>
+                                        <th class="py-3 px-6 text-center">Taxa</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-600 text-sm">
+                                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                        <td class="py-3 px-6 text-left">Escola Municipal João Silva</td>
+                                        <td class="py-3 px-6 text-center">450</td>
+                                        <td class="py-3 px-6 text-center">1.350</td>
+                                        <td class="py-3 px-6 text-center">18.5</td>
+                                        <td class="py-3 px-6 text-center">
+                                            <span class="bg-green-100 text-green-800 py-1 px-3 rounded-full text-xs">4.1%</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                        <td class="py-3 px-6 text-left">Escola Municipal Maria Santos</td>
+                                        <td class="py-3 px-6 text-center">320</td>
+                                        <td class="py-3 px-6 text-center">960</td>
+                                        <td class="py-3 px-6 text-center">22.4</td>
+                                        <td class="py-3 px-6 text-center">
+                                            <span class="bg-yellow-100 text-yellow-800 py-1 px-3 rounded-full text-xs">7.0%</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                        <td class="py-3 px-6 text-left">Escola Municipal Pedro Alves</td>
+                                        <td class="py-3 px-6 text-center">280</td>
+                                        <td class="py-3 px-6 text-center">840</td>
+                                        <td class="py-3 px-6 text-center">10.2</td>
+                                        <td class="py-3 px-6 text-center">
+                                            <span class="bg-green-100 text-green-800 py-1 px-3 rounded-full text-xs">3.6%</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                        <td class="py-3 px-6 text-left">Escola Municipal Ana Costa</td>
+                                        <td class="py-3 px-6 text-center">390</td>
+                                        <td class="py-3 px-6 text-center">1.170</td>
+                                        <td class="py-3 px-6 text-center">28.1</td>
+                                        <td class="py-3 px-6 text-center">
+                                            <span class="bg-red-100 text-red-800 py-1 px-3 rounded-full text-xs">8.4%</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                        <td class="py-3 px-6 text-left">Escola Municipal Carlos Drummond</td>
+                                        <td class="py-3 px-6 text-center">510</td>
+                                        <td class="py-3 px-6 text-center">1.530</td>
+                                        <td class="py-3 px-6 text-center">19.8</td>
+                                        <td class="py-3 px-6 text-center">
+                                            <span class="bg-green-100 text-green-800 py-1 px-3 rounded-full text-xs">4.3%</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Rodapé -->
+        <footer class="bg-gray-800 text-white py-4">
+            <div class="container mx-auto px-4 text-center">
+                <p>&copy; 2023 NutriEscola - Sistema de Logística da Merenda Escolar</p>
+                <p class="text-sm text-gray-400 mt-1">Versão 1.0.0</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Funcionalidade das abas
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+                    
+                    // Remover classes ativas de todos os botões e conteúdos
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('text-green-600', 'border-b-2', 'border-green-600');
+                        btn.classList.add('text-gray-500');
+                    });
+                    
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Adicionar classes ativas ao botão e conteúdo selecionados
+                    button.classList.add('text-green-600', 'border-b-2', 'border-green-600');
+                    button.classList.remove('text-gray-500');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9402bcfcb3655440',t:'MTc0NzMxMzE4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
